@@ -6,11 +6,11 @@ const memeTemplates = [
   },
   {
     name: "Two Buttons",
-    image: "../templates/Two_Buttons.jpg"
+    image: "../templates/two_buttons.jpg"
   },
   {
     name: "Left Exit 12 Off Ramp",
-    image: "../templates/Left_Exit _12_Off_Ramp.jpg"
+    image: "../templates/left_exit.jpg"
   },
   {
     name: "waiting skeleton",
@@ -18,11 +18,11 @@ const memeTemplates = [
   },
   {
     name: "Disaster Girl",
-    image: "../templates/Disaster_Girl.jpg"
+    image: "../templates/disaster.jpg"
   },
   {
     name:"Gru's Plan",
-    image: "../templates/Gru_plan.jpg"
+    image: "../templates/gru.jpg"
   },
   {
     name:"Sad Pablo",

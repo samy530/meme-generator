@@ -5,11 +5,11 @@ const memeTemplates = [
   },
   {
     name: "Two Buttons",
-    image: "https://samy530.github.io/meme-generator/templates/Two_Buttons.jpg"
+    image: "https://samy530.github.io/meme-generator/templates/two_buttons.jpg"
   },
   {
     name: "Left Exit 12 Off Ramp",
-    image: "https://samy530.github.io/meme-generator/templates/Left_Exit_12_Off_Ramp.jpg"
+    image: "https://samy530.github.io/meme-generator/templates/left_exit.jpg"
   },
   {
     name: "waiting skeleton",
@@ -17,11 +17,11 @@ const memeTemplates = [
   },
   {
     name: "Disaster Girl",
-    image: "https://samy530.github.io/meme-generator/templates/Disaster_Girl.jpg"
+    image: "https://samy530.github.io/meme-generator/templates/disaster.jpg"
   },
   {
     name:"Gru's Plan",
-    image: "https://samy530.github.io/meme-generator/templates/Gru_plan.jpg"
+    image: "https://samy530.github.io/meme-generator/templates/gru.jpg"
   },
   {
     name:"Sad Pablo",

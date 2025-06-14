@@ -119,27 +119,11 @@ canvas {
   color: white;
   border: none;
 }
-#btnShare {
-  background-color: #4f46e5; /* bleu indigo */
+
+.buttons button#btnShare {
+  background-color: #3498db;
   color: white;
-  padding: 12px 24px;
   border: none;
-  border-radius: 12px;
-  font-size: 16px;
-  font-weight: bold;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-#btnShare:hover {
-  background-color: #4338ca; 
-  transform: translateY(-2px);
-}
-
-#btnShare:active {
-  transform: translateY(0);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 .buttons a[href*="templates"],
 .buttons a[href*="galerie"] {

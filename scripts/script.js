@@ -21,6 +21,13 @@ if (savedTemplate) {
   imageUpload.style.display = "none";
 }
 
+// ⚠️ Correction ici : définir le canvas à la taille de l'image
+image.onload = () => {
+  canvas.width = image.width;
+  canvas.height = image.height;
+  drawMeme();
+};
+
 imageUpload.addEventListener("change", function () {
   const file = imageUpload.files[0];
   if (file) {
@@ -32,9 +39,6 @@ imageUpload.addEventListener("change", function () {
   }
 });
 
-image.onload = drawMeme;
-
-// Ajouter un texte
 addTextBtn.addEventListener("click", () => {
   const index = texts.length;
   const newText = {

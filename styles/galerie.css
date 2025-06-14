@@ -34,7 +34,7 @@ h1 {
   border-radius: 8px;
   padding: 10px;
   box-shadow: 0 3px 6px rgba(0,0,0,0.1);
-  flex: 1 1 calc(33.33% - 20px); /* 3 par ligne avec gap de 15px */
+  flex: 1 1 calc(33.33% - 20px); 
   max-width: calc(33.33% - 20px);
   box-sizing: border-box;
   min-width: 180px;
@@ -65,7 +65,6 @@ h1 {
   transition: background-color 0.3s;
 }
 
-/* Couleur : Supprimer */
 .delete-btn {
   background-color: #e74c3c;
   color: white;
@@ -74,7 +73,6 @@ h1 {
   background-color: #c0392b;
 }
 
-/* Couleur : Télécharger */
 .download-btn {
   background-color: #3498db;
   color: white;
@@ -83,7 +81,7 @@ h1 {
   background-color: #2c80b4;
 }
 
-/* Couleur : Partager */
+
 .share-btn {
   background-color: #27ae60;
   color: white;
@@ -92,7 +90,6 @@ h1 {
   background-color: #1e8c4b;
 }
 
-/* Bouton "Supprimer toute la galerie" */
 #clearGallery,
 .clear-btn {
   margin: 30px auto 0;

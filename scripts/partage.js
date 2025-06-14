@@ -5,7 +5,7 @@ function shareMeme(dataUrl) {
       const file = new File([blob], 'meme.png', { type: 'image/png' });
 
       if (navigator.canShare && navigator.canShare({ files: [file] })) {
-        // ✅ Partage natif sur mobile
+        // Partage sur mobile
         navigator.share({
           files: [file],
           title: 'Mon mème',
@@ -15,7 +15,7 @@ function shareMeme(dataUrl) {
           alert("Le partage a échoué sur mobile.");
         });
       } else {
-        // ✅ Partage sur PC via upload Imgur
+        // Partage sur PC via l'API Imgur
         const formData = new FormData();
         formData.append("image", blob);
 

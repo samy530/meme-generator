@@ -3,7 +3,7 @@ const clearBtn = document.getElementById('clearGallery');
 let memes = JSON.parse(localStorage.getItem('memes') || '[]');
 
 function renderGallery() {
-  gallery.innerHTML = ''; // Réinitialiser la galerie
+  gallery.innerHTML = ''; 
 
   memes.forEach((dataUrl, index) => {
     const container = document.createElement('div');
@@ -54,7 +54,6 @@ function renderGallery() {
   clearBtn.style.display = memes.length > 0 ? 'block' : 'none';
 }
 
-// Bouton pour tout supprimer
 clearBtn.addEventListener('click', () => {
   if (confirm("⚠️ Supprimer *toute* la galerie ?")) {
     memes = [];

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>templates</title>
+    <link rel="stylesheet" href="../styles/templates.css">
+    <link rel="stylesheet" href="../styles/navbar.css">
+    <link rel="stylesheet" href="../styles/footer.css" />
+</head>
+<body>
+    <nav class="navbar">
+     <div class="logo">😂  MemeGen</div>
+        <ul class="nav-links">
+         <li><a href="../index.html">Accueil</a></li>
+         <li><a href="./templates.html">Templates</a></li>
+         <li><a href="./galerie.html">Galerie</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <h1>🧩 Choisis un modèle de meme</h1>
+        <div id="template-gallery" class="gallery"></div>
+   </div>
+    <footer>
+     <p>© <span id="year"></span> MemeGen — Projet réalisé par Samy.M</p>
+   </footer>
+   <script>
+     document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+  <script src="../scripts/templates.js"></script>
+</body>
+</html>

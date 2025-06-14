@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Générateur de Memes</title>
+  <link rel="stylesheet" href="./styles/index.css">
+  <link rel="stylesheet" href="./styles/navbar.css">
+  <link rel="stylesheet" href="./styles/footer.css">
+</head>
+<body>
+    <nav class="navbar">
+     <div class="logo">😂  MemeGen</div>
+        <ul class="nav-links">
+         <li><a href="./index.html">Accueil</a></li>
+         <li><a href="./pages/templates.html">Templates</a></li>
+         <li><a href="./pages/galerie.html">Galerie</a></li>
+        </ul>
+    </nav>
+
+  <div class="container">
+     <h1>🎉 Générateur de Memes</h1>
+
+     <input type="file" id="imageUpload" accept="image/*">
+
+     <div id="textInputs"></div>
+     <button id="addTextBtn">Ajouter un texte</button>
+
+     <canvas id="memeCanvas" width="500" height="500"></canvas>
+
+      <div class="buttons">
+         <button id="downloadBtn">⬇️ Télécharger</button>
+         <button id="shareBtn">📤 Partager</button>
+         <button id="resetBtn">🗑️ Réinitialiser</button>
+         <a href="./pages/templates.html">🧩 Choisir un modèle</a>
+         <a href="./pages/galerie.html">🖼️ Voir la galerie</a>
+      </div>
+  </div>
+  <footer>
+   <p>© <span id="year"></span> MemeGen — Projet réalisé par Samy.M</p>
+  </footer>
+  <script>
+   document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+  <script src="./scripts/script.js"></script>
+  <script src="./scripts/partage.js"></script>
+</body>
+</html>

@@ -125,22 +125,29 @@ canvas.addEventListener("mouseleave", () => {
   selectedTextIndex = -1;
 });
 
-// Déplacement mobile
+// Déplacement mobile (corrigé)
 canvas.addEventListener("touchstart", (e) => {
-  const touch = e.touches[0];
-  const { x, y } = getTouchPos(touch);
-  checkTextHit(x, y);
-});
+  e.preventDefault();
+  if (e.touches.length === 1) {
+    const rect = canvas.getBoundingClientRect();
+    const x = (e.touches[0].clientX - rect.left) * (canvas.width / rect.width);
+    const y = (e.touches[0].clientY - rect.top) * (canvas.height / rect.height);
+    checkTextHit(x, y);
+  }
+}, { passive: false });
 
 canvas.addEventListener("touchmove", (e) => {
-  const touch = e.touches[0];
-  const { x, y } = getTouchPos(touch);
-  if (isDragging && selectedTextIndex !== -1) {
+  e.preventDefault();
+  if (e.touches.length === 1 && isDragging && selectedTextIndex !== -1) {
+    const rect = canvas.getBoundingClientRect();
+    const x = (e.touches[0].clientX - rect.left) * (canvas.width / rect.width);
+    const y = (e.touches[0].clientY - rect.top) * (canvas.height / rect.height);
+
     texts[selectedTextIndex].x = x - offsetX;
     texts[selectedTextIndex].y = y - offsetY;
     drawMeme();
   }
-});
+}, { passive: false });
 
 canvas.addEventListener("touchend", () => {
   isDragging = false;
@@ -175,20 +182,9 @@ function getMousePos(evt) {
   const rect = canvas.getBoundingClientRect();
   const scaleX = canvas.width / rect.width;
   const scaleY = canvas.height / rect.height;
-
   return {
     x: (evt.clientX - rect.left) * scaleX,
     y: (evt.clientY - rect.top) * scaleY
-  };
-}
-
-function getTouchPos(touch) {
-  const rect = canvas.getBoundingClientRect();
-  const scaleX = canvas.width / rect.width;
-  const scaleY = canvas.height / rect.height;
-  return {
-    x: (touch.clientX - rect.left) * scaleX,
-    y: (touch.clientY - rect.top) * scaleY
   };
 }
 

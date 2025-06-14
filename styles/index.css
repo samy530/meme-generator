@@ -120,11 +120,6 @@ canvas {
   border: none;
 }
 
-.buttons button#shareBtn {
-  background-color: #3498db;
-  color: white;
-  border: none;
-}
 
 .buttons a[href*="templates"],
 .buttons a[href*="galerie"] {

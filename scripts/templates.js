@@ -1,54 +1,54 @@
-// templates.js
 const memeTemplates = [
   {
     name: "Drake",
-    image: "../templates/drake.jpg"
+    image: "https://samy530.github.io/meme-generator/templates/drake.jpg"
   },
   {
     name: "Two Buttons",
-    image: "../templates/two_buttons.jpg"
+    image: "https://samy530.github.io/meme-generator/templates/Two_Buttons.jpg"
   },
   {
     name: "Left Exit 12 Off Ramp",
-    image: "../templates/left_exit.jpg"
+    image: "https://samy530.github.io/meme-generator/templates/Left_Exit_12_Off_Ramp.jpg"
   },
   {
     name: "waiting skeleton",
-    image: "../templates/waiting_skeleton.jpg"
+    image: "https://samy530.github.io/meme-generator/templates/waiting_skeleton.jpg"
   },
   {
     name: "Disaster Girl",
-    image: "../templates/disaster.jpg"
+    image: "https://samy530.github.io/meme-generator/templates/Disaster_Girl.jpg"
   },
   {
     name:"Gru's Plan",
-    image: "../templates/gru.jpg"
+    image: "https://samy530.github.io/meme-generator/templates/Gru_plan.jpg"
   },
   {
     name:"Sad Pablo",
-    image: "../templates/sad_pablo.jpg"
+    image: "https://samy530.github.io/meme-generator/templates/sad_pablo.jpg"
   },
   {
     name:"Mocking Spongebob",
-    image: "../templates/moking_spongebob.jpg"
+    image: "https://samy530.github.io/meme-generator/templates/moking_spongebob.jpg"
   },
   {
     name:"meme brain",
-    image: "../templates/brain.jpg"
+    image: "https://samy530.github.io/meme-generator/templates/brain.jpg"
   },
   {
     name:"Woman Yelling at cat",
-    image: "../templates/woman_cat.jpg"
+    image: "https://samy530.github.io/meme-generator/templates/woman_cat.jpg"
   },
   {
     name:"Monkey Puppet",
-    image: "../templates/monkey_puppet.jpg"
+    image: "https://samy530.github.io/meme-generator/templates/monkey_puppet.jpg"
   },
   {
     name:"Boardroom Meeting Suggestion",
-    image: "../templates/boardroom_meeting.jpg"
+    image: "https://samy530.github.io/meme-generator/templates/boardroom_meeting.jpg"
   }
 ];
+
 const gallery = document.getElementById('template-gallery');
 
     memeTemplates.forEach(template => {

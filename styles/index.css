@@ -120,7 +120,7 @@ canvas {
   border: none;
 }
 
-.buttons button#btnShare {
+.buttons button#shareBtn {
   background-color: #3498db;
   color: white;
   border: none;

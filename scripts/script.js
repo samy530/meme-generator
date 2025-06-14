@@ -13,7 +13,6 @@ const addTextBtn = document.getElementById("addTextBtn");
 const downloadBtn = document.getElementById("downloadBtn");
 const resetBtn = document.getElementById("resetBtn");
 
-// Charger une image depuis le template sélectionné
 const savedTemplate = localStorage.getItem("selectedTemplate");
 if (savedTemplate) {
   image.src = savedTemplate;
@@ -88,7 +87,6 @@ addTextBtn.addEventListener("click", () => {
     texts.splice(idx, 1);
     textInputs.removeChild(div);
 
-    // Réindexer
     [...textInputs.children].forEach((child, newIndex) => {
       const elements = child.querySelectorAll('[data-index]');
       elements.forEach(el => el.dataset.index = newIndex);
@@ -100,7 +98,6 @@ addTextBtn.addEventListener("click", () => {
   drawMeme();
 });
 
-// Déplacement souris
 canvas.addEventListener("mousedown", (e) => {
   const { x, y } = getMousePos(e);
   checkTextHit(x, y);
@@ -125,7 +122,6 @@ canvas.addEventListener("mouseleave", () => {
   selectedTextIndex = -1;
 });
 
-// Déplacement mobile (corrigé)
 canvas.addEventListener("touchstart", (e) => {
   e.preventDefault();
   if (e.touches.length === 1) {

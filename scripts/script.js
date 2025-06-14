@@ -13,20 +13,13 @@ const addTextBtn = document.getElementById("addTextBtn");
 const downloadBtn = document.getElementById("downloadBtn");
 const resetBtn = document.getElementById("resetBtn");
 
-// Charger un modèle enregistré si disponible
+// Charger une image depuis le template sélectionné
 const savedTemplate = localStorage.getItem("selectedTemplate");
 if (savedTemplate) {
   image.src = savedTemplate;
   localStorage.removeItem("selectedTemplate");
   imageUpload.style.display = "none";
 }
-
-// ⚠️ Correction ici : définir le canvas à la taille de l'image
-image.onload = () => {
-  canvas.width = image.width;
-  canvas.height = image.height;
-  drawMeme();
-};
 
 imageUpload.addEventListener("change", function () {
   const file = imageUpload.files[0];
@@ -38,6 +31,8 @@ imageUpload.addEventListener("change", function () {
     reader.readAsDataURL(file);
   }
 });
+
+image.onload = drawMeme;
 
 addTextBtn.addEventListener("click", () => {
   const index = texts.length;
@@ -93,7 +88,7 @@ addTextBtn.addEventListener("click", () => {
     texts.splice(idx, 1);
     textInputs.removeChild(div);
 
-    // Réindexer les data-index des champs restants
+    // Réindexer
     [...textInputs.children].forEach((child, newIndex) => {
       const elements = child.querySelectorAll('[data-index]');
       elements.forEach(el => el.dataset.index = newIndex);
@@ -105,36 +100,14 @@ addTextBtn.addEventListener("click", () => {
   drawMeme();
 });
 
+// Déplacement souris
 canvas.addEventListener("mousedown", (e) => {
   const { x, y } = getMousePos(e);
-
-  for (let i = texts.length - 1; i >= 0; i--) {
-    const t = texts[i];
-    ctx.save();
-    ctx.translate(t.x, t.y);
-    ctx.rotate((t.rotation * Math.PI) / 180);
-    ctx.font = `${t.size}px Arial`;
-    const width = ctx.measureText(t.text).width;
-    const height = t.size;
-    ctx.restore();
-
-    const tx = t.x - width / 2;
-    const ty = t.y - height;
-
-    const isInside = x >= tx && x <= tx + width && y >= ty && y <= ty + height;
-    if (isInside) {
-      selectedTextIndex = i;
-      isDragging = true;
-      offsetX = x - t.x;
-      offsetY = y - t.y;
-      return;
-    }
-  }
+  checkTextHit(x, y);
 });
 
 canvas.addEventListener("mousemove", (e) => {
   const { x, y } = getMousePos(e);
-
   if (isDragging && selectedTextIndex !== -1) {
     texts[selectedTextIndex].x = x - offsetX;
     texts[selectedTextIndex].y = y - offsetY;
@@ -152,6 +125,52 @@ canvas.addEventListener("mouseleave", () => {
   selectedTextIndex = -1;
 });
 
+// Déplacement mobile
+canvas.addEventListener("touchstart", (e) => {
+  const touch = e.touches[0];
+  const { x, y } = getTouchPos(touch);
+  checkTextHit(x, y);
+});
+
+canvas.addEventListener("touchmove", (e) => {
+  const touch = e.touches[0];
+  const { x, y } = getTouchPos(touch);
+  if (isDragging && selectedTextIndex !== -1) {
+    texts[selectedTextIndex].x = x - offsetX;
+    texts[selectedTextIndex].y = y - offsetY;
+    drawMeme();
+  }
+});
+
+canvas.addEventListener("touchend", () => {
+  isDragging = false;
+  selectedTextIndex = -1;
+});
+
+function checkTextHit(x, y) {
+  for (let i = texts.length - 1; i >= 0; i--) {
+    const t = texts[i];
+    ctx.save();
+    ctx.translate(t.x, t.y);
+    ctx.rotate((t.rotation * Math.PI) / 180);
+    ctx.font = `${t.size}px Arial`;
+    const width = ctx.measureText(t.text).width;
+    const height = t.size;
+    ctx.restore();
+
+    const tx = t.x - width / 2;
+    const ty = t.y - height;
+
+    if (x >= tx && x <= tx + width && y >= ty && y <= ty + height) {
+      selectedTextIndex = i;
+      isDragging = true;
+      offsetX = x - t.x;
+      offsetY = y - t.y;
+      break;
+    }
+  }
+}
+
 function getMousePos(evt) {
   const rect = canvas.getBoundingClientRect();
   const scaleX = canvas.width / rect.width;
@@ -160,6 +179,16 @@ function getMousePos(evt) {
   return {
     x: (evt.clientX - rect.left) * scaleX,
     y: (evt.clientY - rect.top) * scaleY
+  };
+}
+
+function getTouchPos(touch) {
+  const rect = canvas.getBoundingClientRect();
+  const scaleX = canvas.width / rect.width;
+  const scaleY = canvas.height / rect.height;
+  return {
+    x: (touch.clientX - rect.left) * scaleX,
+    y: (touch.clientY - rect.top) * scaleY
   };
 }
 

@@ -1,6 +1,8 @@
 function shareMeme(dataUrl) {
   try {
-    // Conversion manuelle du dataURL en blob
+    console.log("dataUrl =", dataUrl?.slice(0, 50)); // Vérifie le début du lien
+
+    // ✅ Conversion dataUrl → Blob (manuelle pour compatibilité)
     const byteString = atob(dataUrl.split(',')[1]);
     const mimeString = dataUrl.split(',')[0].split(':')[1].split(';')[0];
     const ab = new ArrayBuffer(byteString.length);
@@ -9,9 +11,11 @@ function shareMeme(dataUrl) {
       ia[i] = byteString.charCodeAt(i);
     }
     const blob = new Blob([ab], { type: mimeString });
-
     const file = new File([blob], 'meme.png', { type: 'image/png' });
 
+    console.log("Client ID utilisé :", CONFIG?.IMGUR_CLIENT_ID);
+
+    // ✅ Si partage mobile natif possible
     if (navigator.canShare && navigator.canShare({ files: [file] })) {
       navigator.share({
         files: [file],
@@ -21,7 +25,9 @@ function shareMeme(dataUrl) {
         console.error('Erreur de partage mobile :', err);
         alert("Le partage a échoué sur mobile.");
       });
+
     } else {
+      // ✅ Sinon : partage via Imgur
       const formData = new FormData();
       formData.append("image", blob);
 
@@ -34,6 +40,8 @@ function shareMeme(dataUrl) {
       })
         .then(response => response.json())
         .then(data => {
+          console.log("Réponse Imgur :", data);
+
           if (data.success) {
             const imgurUrl = data.data.link;
             navigator.clipboard.writeText(imgurUrl)
@@ -44,7 +52,8 @@ function shareMeme(dataUrl) {
                 alert("Lien Imgur : " + imgurUrl);
               });
           } else {
-            throw new Error("Erreur Imgur");
+            console.error("Erreur retournée par Imgur :", data);
+            alert("Le partage a échoué : réponse invalide d’Imgur.");
           }
         })
         .catch(err => {
@@ -52,6 +61,7 @@ function shareMeme(dataUrl) {
           alert("Le partage a échoué sur PC. Essaie de télécharger le mème manuellement.");
         });
     }
+
   } catch (err) {
     console.error("Erreur traitement image :", err);
     alert("Une erreur est survenue lors du traitement de l’image.");

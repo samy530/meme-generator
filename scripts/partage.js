@@ -1,4 +1,3 @@
-
 function shareMeme(dataUrl) {
   fetch(dataUrl)
     .then(res => res.blob())
@@ -6,7 +5,7 @@ function shareMeme(dataUrl) {
       const file = new File([blob], 'meme.png', { type: 'image/png' });
 
       if (navigator.canShare && navigator.canShare({ files: [file] })) {
-        // ✅ Partage mobile natif (Android/iOS)
+        // ✅ Partage natif sur mobile
         navigator.share({
           files: [file],
           title: 'Mon mème',
@@ -16,17 +15,33 @@ function shareMeme(dataUrl) {
           alert("Le partage a échoué sur mobile.");
         });
       } else {
-        // ✅ Fallback pour PC : créer un lien temporaire blob
-        const blobUrl = URL.createObjectURL(blob);
+        // ✅ Partage sur PC via upload Imgur
+        const formData = new FormData();
+        formData.append("image", blob);
 
-        const input = document.createElement("input");
-        input.value = blobUrl;
-        document.body.appendChild(input);
-        input.select();
-        document.execCommand("copy");
-        document.body.removeChild(input);
-
-        alert("Lien temporaire copié ! Tu peux maintenant le coller pour partager l’image.");
+        fetch("https://api.imgur.com/3/image", {
+          method: "POST",
+          headers: {
+            Authorization: "Client-ID 50c9abe2ef64157"
+          },
+          body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            const imgurUrl = data.data.link;
+            // Copier automatiquement dans le presse-papier
+            navigator.clipboard.writeText(imgurUrl).then(() => {
+              alert("Lien Imgur copié ! Tu peux maintenant le partager :\n" + imgurUrl);
+            });
+          } else {
+            throw new Error("Erreur Imgur");
+          }
+        })
+        .catch(err => {
+          console.error("Erreur lors de l'upload Imgur :", err);
+          alert("Le partage a échoué sur PC. Essaie de télécharger le mème manuellement.");
+        });
       }
     })
     .catch(err => {

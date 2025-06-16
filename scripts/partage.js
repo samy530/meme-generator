@@ -19,6 +19,7 @@ function shareMeme(dataUrl) {
         const formData = new FormData();
         formData.append("image", blob);
 
+        
         fetch("https://api.imgur.com/3/image", {
           method: "POST",
           headers: {

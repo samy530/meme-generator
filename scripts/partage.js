@@ -12,7 +12,6 @@ function shareMeme(dataUrl) {
           text: 'Regarde ce meme que j’ai créé !'
         }).catch(err => {
           console.error('Erreur de partage mobile :', err);
-          alert("Le partage a échoué sur mobile.");
         });
       } else {
         // Partage sur PC via l'API Imgur

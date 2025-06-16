@@ -18,7 +18,7 @@ function renderGallery() {
     deleteBtn.textContent = '🗑️ Supprimer';
     deleteBtn.className = 'delete-btn';
     deleteBtn.onclick = () => {
-      if (confirm("Supprimer ce mème ?")) {
+      if (confirm("Supprimer ce meme ?")) {
         memes.splice(index, 1);
         localStorage.setItem('memes', JSON.stringify(memes));
         renderGallery();

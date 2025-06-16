@@ -8,8 +8,8 @@ function shareMeme(dataUrl) {
         // Partage sur mobile
         navigator.share({
           files: [file],
-          title: 'Mon mème',
-          text: 'Regarde ce mème que j’ai créé !'
+          title: 'Mon meme',
+          text: 'Regarde ce meme que j’ai créé !'
         }).catch(err => {
           console.error('Erreur de partage mobile :', err);
           alert("Le partage a échoué sur mobile.");
@@ -40,7 +40,7 @@ function shareMeme(dataUrl) {
         })
         .catch(err => {
           console.error("Erreur lors de l'upload Imgur :", err);
-          alert("Le partage a échoué sur PC. Essaie de télécharger le mème manuellement.");
+          alert("Le partage a échoué sur PC. Essaie de télécharger le meme manuellement.");
         });
       }
     })
